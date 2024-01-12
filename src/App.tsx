@@ -1,7 +1,8 @@
 import { useState } from "react";
-import FormAddTodo from "./FormAddTodo";
+import FormAddTodo from "./components/FormAddTodo";
+import Todos from "./components/Todos";
 
-interface Todo {
+export interface Todo {
   texto: string;
   completado: boolean;
 }
@@ -40,30 +41,14 @@ const App = () => {
   return (
     <>
       <div>
-        <h1>Todo con TS</h1>
+        <h1>Todo componentes con TS</h1>
         <FormAddTodo addTodo={addTodo} />
         <div className="todo-list">
-          {todos.map((todo, index) => (
-            <article key={index}>
-              <fieldset>
-                <label htmlFor={`todo-${index}`}>
-                  <input
-                    type="checkbox"
-                    id={`todo-${index}`}
-                    checked={todo.completado}
-                    onChange={() => toggleTodo(index)}
-                  />
-                  {todo.texto}
-                </label>
-              </fieldset>
-              <button
-                className="btn-destroy"
-                onClick={() => eliminarTodo(index)}
-              >
-                Eliminar
-              </button>
-            </article>
-          ))}
+          <Todos 
+          todos={todos}
+          toggleTodo={toggleTodo}
+          eliminarTodo={eliminarTodo}
+          />
         </div>
       </div>
     </>
